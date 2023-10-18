@@ -31,7 +31,7 @@ Install dependencies
 
 ```bash
   npm install | yarn install
-
+```
 
 ## Running Tests
 
