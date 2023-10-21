@@ -3,6 +3,8 @@ import { validate } from "../middlewares/validateMiddleware";
 import {
   authenticateUserSchema,
   createUserSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
 } from "../schemas/user.schema";
 import { UserController } from "../controllers/auth.controller";
 import { requireUser } from "../middlewares/requireUserMiddleware";
@@ -30,8 +32,16 @@ function routes(app: Express) {
     user.authenticateUser.bind(user)
   );
 
-  app.post("/auth/local/forgot-password");
-  app.post("/auth/local/reset-password");
+  app.post(
+    "/auth/local/forgot-password",
+    validate(forgotPasswordSchema),
+    user.generateAndSendResetToken.bind(user)
+  );
+  app.post(
+    "/auth/local/reset-password/:userId/:token",
+    validate(resetPasswordSchema),
+    user.resetPassword.bind(user)
+  );
   app.get("/auth/currentuser", requireUser, user.getCurrentUser.bind(user));
 }
 

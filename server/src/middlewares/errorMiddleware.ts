@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import log from "../utils/logger";
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from "http-status";
 
-class CustomError extends Error {
+export class CustomError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;

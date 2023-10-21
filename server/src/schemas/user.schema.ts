@@ -90,6 +90,45 @@ const forgotPasswordSchema = object({
  */
 type forgotPasswordInput = TypeOf<typeof forgotPasswordSchema>;
 
+/**
+ * Represents the schema for user that is setting a new password.
+ */
+const resetPasswordSchema = object({
+  body: object({
+    /**
+     * Represents the user's new password.
+     * @remarks Must be at least 6 characters long.
+     */
+    password: string({ required_error: "Password is required" }).min(
+      6,
+      "Password is too short - should be 6 chars minimum"
+    ),
+  }),
+  params: object({
+    /**
+     * Represents the user's unique identifier.
+     * @remarks Must be provided in the URL parameters.
+     * @remarks Required for identifying the user.
+     */
+    userId: string({
+      required_error: "Id pass is required",
+    }),
+    /**
+     * Represents the reset token sent to the user's email.
+     * @remarks Must be provided in the URL parameters.
+     * @remarks Required for verifying the user's identity.
+     */
+    token: string({
+      required_error: "Token pass is require",
+    }),
+  }),
+});
+
+/**
+ * Represents the input data type for resetting a user's password.
+ */
+type resetPasswordInput = TypeOf<typeof resetPasswordSchema>;
+
 export {
   createUserSchema,
   createUserInput,
@@ -97,4 +136,6 @@ export {
   authenticateUserInput,
   forgotPasswordSchema,
   forgotPasswordInput,
+  resetPasswordSchema,
+  resetPasswordInput,
 };

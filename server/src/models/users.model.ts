@@ -67,4 +67,36 @@ userSchema.methods.comparePassword = async function (userPassword: string) {
 // Create the User model
 const User = model<UserDocument>("User", userSchema);
 
-export { User, UserDocument, UserInput };
+/**
+ * Represents a reset code document stored in the database.
+ */
+interface ResetCodeDocument extends Document {
+  /**
+   * The ID of the user associated with this reset code.
+   */
+  userId: UserDocument["_id"];
+  /**
+   * The reset code string.
+   */
+  code: string;
+  /**
+   * The expiration date and time of the reset code.
+   */
+  expireAt: Date;
+}
+
+/**
+ * The Mongoose schema for the ResetCode document.
+ */
+const resetCodeSchema = new Schema<ResetCodeDocument>({
+  userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  code: { type: String, required: true },
+  expireAt: { type: Date, expires: "10m" },
+});
+
+/**
+ * The Mongoose model for the ResetCode schema.
+ */
+const ResetCode = model<ResetCodeDocument>("ResetCode", resetCodeSchema);
+
+export { User, UserDocument, UserInput, ResetCodeDocument, ResetCode };
