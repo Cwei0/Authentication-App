@@ -1,31 +1,34 @@
 export const Home = () => {
   const footer = ["Business", "Blog", "Job"];
   return (
-    <main className="gap-10 h-screen w-screen bg-black">
-      <div className="max-w-[768px] relative">
-        <div className="flex flex-col flex-1 gap-6">
-          <h1 className="text-blue-700 text-4xl font-extrabold">
-            My App
+    <main className="h-full w-full">
+      <div className="h-screen px-5 mx-auto flex flex-col items-center justify-center max-w-[600px] w-full relative">
+        <div className="flex flex-col gap-2 items-center justify-center w-full">
+          <h1 className="text-center text-washed-blue font-bold text-6xl tracking-wide">
+            Bluesky
           </h1>
-          <h2 className="text-gray-500 text-3xl font-extrabold tracking-wider">
-            See What's next
+          <h2 className="text center text-gray-600 font-bold text-4xl">
+            See what's next
           </h2>
-          <div className="flex flex-col xl:flex-row gap-4 w-full px-1">
-            <button className="w-full rounded-2xl text-center px-5 py-3 basis-auto bg-blue-700 text-white"></button>
-            <button className="w-full rounded-2xl text-center px-5 py-3 basis-auto bg-gray-500 text-white"></button>
+          <div className="flex flex-col w-full gap-4">
+            <button className="cursor-pointer p-2 text-white bg-washed-blue rounded-full">
+              Create a new account
+            </button>
+            <button className="cursor-pointer p-2 rounded-full bg-gray-100">
+              Sign in
+            </button>
           </div>
         </div>
-
-        <footer className="absolute left-0 bottom-0 right-0 border-t-2 border-gray-600">
-          <div className="flex flex-row justify-start items-start">
-            {footer.map((item) => (
-              <p className="text-left font-light text-blue-700">
-                {item}
-              </p>
-            ))}
+        <footer className="absolute bottom-2 w-full">
+          <div className="border-t border-t-gray-200">
+            <div className="flex flex-row justify-start items-center gap-8 p-5">
+              {footer.map((item) => (
+                <p className="font-light text-washed-blue tracking-wide">{item}</p>
+              ))}
+            </div>
           </div>
         </footer>
       </div>
     </main>
-  )
-}
+  );
+};

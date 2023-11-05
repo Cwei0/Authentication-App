@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         manrope: ["Manrope", "san-serif"]
+      },
+      colors: {
+       "washed-blue": "#0085FF"
       }
     },
   },
