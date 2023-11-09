@@ -5,6 +5,8 @@ import { dbConnect } from "./db";
 import { errorHandler } from "../middlewares/errorMiddleware";
 import { accessMiddleware } from "../middlewares/authMiddleware";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import passport from "passport";
 
 /**
  * The main application class responsible for configuring and starting the Express server.
@@ -32,6 +34,7 @@ class App {
   private middlewares(): void {
     this.app.use(logRequest);
     this.app.use(cookieParser());
+    this.app.use(helmet())
     this.app.use(accessMiddleware);
   }
 
@@ -42,6 +45,7 @@ class App {
    * @private
    */
   private loadRoutes(): void {
+    this.app.use(passport.initialize());
     routes(this.app);
     this.app.use(errorHandler);
     this.app.use(logError);

@@ -1,14 +1,8 @@
 import App from "../src/utils";
 import supertest from "supertest";
-import log from "../src/utils/logger";
-import { UserService } from "../src/services/auth.service";
+import { UserController } from "../src/controllers/auth.controller";
 
 const app = new App().start();
-
-jest.mock("../src/utils/logger", () => ({
-  info: jest.fn(),
-  error: jest.fn(),
-}));
 
 const userInput = {
   name: "Gabe Bott",
@@ -34,7 +28,7 @@ describe("authentication", () => {
     describe("given the input info are valid", () => {
       it("should return user payload and status of 201", async () => {
         const createUserServiceMock = jest
-          .spyOn(new UserService(), "createNewUser")
+          .spyOn(new UserController(), "createNewUser")
           //@ts-ignore
           .mockReturnValueOnce(userPayload);
 
